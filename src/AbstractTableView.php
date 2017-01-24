@@ -8,6 +8,20 @@ use Illuminate\Support\Facades\View;
 abstract class AbstractTableView {
 
     /**
+     * The unique HTML Id, so that Vue.js can bind to it.
+     *
+     * @var string
+     */
+    protected $htmlId;
+
+    /**
+     * The URL to query the table data from.
+     *
+     * @var string
+     */
+    protected $apiURL;
+
+    /**
      * The Blade view to use for rendering.
      *
      * @var string
@@ -21,8 +35,11 @@ abstract class AbstractTableView {
      */
     protected $columns;
 
-    public function __construct()
+    public function __construct($htmlId, $apiURL)
     {
+        $this->htmlId = $htmlId;
+        $this->apiURL = $apiURL;
+
         $this->columns = new Collection();
         $this->view = config('tableview.default-table-view');
 
@@ -45,6 +62,10 @@ abstract class AbstractTableView {
 
     public function render()
     {
-        return View::make($this->view)->render();
+        return View::make($this->view)
+                ->with('htmlId', $this->htmlId)
+                ->with('apiURL', $this->apiURL)
+                ->with('columns', $this->columns)
+                ->render();
     }
 }

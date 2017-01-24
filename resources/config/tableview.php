@@ -7,5 +7,5 @@
 |
 */
 return [
-    'default-table-view' => 'tableview::test',
+    'default-table-view' => 'tableview::tableview',
 ];

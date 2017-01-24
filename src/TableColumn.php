@@ -11,4 +11,14 @@ class TableColumn {
         $this->attribute = $attribute;
         $this->label = $label;
     }
+
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
+
+    public function getLabel()
+    {
+        return $this->label;
+    }
 }
