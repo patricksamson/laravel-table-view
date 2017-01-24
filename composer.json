@@ -1,0 +1,34 @@
+{
+    "name": "lykegenes/laravel-table-view",
+    "description": "An API-based table view for Laravel. Based on Vue.js and Element-UI.",
+    "keywords": [
+        "laravel",
+        "datatable"
+    ],
+    "homepage": "https://github.com/Lykegenes/laravel-table-view",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Patrick Samson",
+            "email": "patricksamson236@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~5.3",
+        "illuminate/http": "~5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7",
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lykegenes\\TableView\\": "src"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
