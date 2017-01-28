@@ -14,20 +14,19 @@
     <el-row type="flex">
         <el-table
             :data="tableData"
-            v-loading="loading"
-            element-loading-text="Loading..."
-            :default-sort="default_sort"
-            border
-            highlight-current-row
-            @sort-change="handleSortChange"
-            stripe
-            style="width: 100%">
+            v-loading="isLoading"
+
+            {!! $attributes->render() !!}
+
+            style="width: 100%"
+            @sort-change="handleSortChange">
+
+            <span slot="empty">No results.</span>
 
             @foreach($columns as $column)
-                <el-table-column
-                    prop="{{ $column->getAttribute() }}"
-                    label="{{ $column->getLabel() }}">
-                </el-table-column>
+
+                {!! $column->render() !!}
+
             @endforeach
 
         </el-table>
@@ -57,7 +56,7 @@
         data() {
             return {
                 tableData: [],
-                loading: true,
+                isLoading: true,
 
                 current_page: 0,
                 page_size: 15,
@@ -96,7 +95,7 @@
             },
 
             fetchData(page) {
-                this.loading = true;
+                this.isLoading = true;
 
                 // Pagination
                 this.page = page || this.page
@@ -119,7 +118,7 @@
                     self.total_items = res.data.meta.pagination.total;
                     self.page_size = res.data.meta.pagination.per_page;
 
-                    self.loading = false
+                    self.isLoading = false
                 })
             },
 

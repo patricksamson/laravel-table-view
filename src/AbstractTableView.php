@@ -4,9 +4,10 @@ namespace Lykegenes\TableView;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Lykegenes\TableView\Columns\TemplateColumn;
 
-abstract class AbstractTableView {
-
+abstract class AbstractTableView
+{
     /**
      * The unique HTML Id, so that Vue.js can bind to it.
      *
@@ -29,17 +30,20 @@ abstract class AbstractTableView {
     protected $view;
 
     /**
-     * Collection of TableColumn
+     * Collection of TableColumn.
      *
      * @var Collection
      */
     protected $columns;
+
+    protected $attributes;
 
     public function __construct($htmlId, $apiURL)
     {
         $this->htmlId = $htmlId;
         $this->apiURL = $apiURL;
 
+        $this->attributes = new TableAttributes();
         $this->columns = new Collection();
         $this->view = config('tableview.default-table-view');
 
@@ -60,12 +64,23 @@ abstract class AbstractTableView {
         return $this;
     }
 
+    public function addTemplateColumn($label, $template)
+    {
+        $this->columns->push(new TemplateColumn($label, $template));
+
+        return $this;
+    }
+
     public function render()
     {
+        $this->attributes->setDefaultsort('date');
+        $this->attributes->set('border', 'true');
+
         return View::make($this->view)
                 ->with('htmlId', $this->htmlId)
                 ->with('apiURL', $this->apiURL)
                 ->with('columns', $this->columns)
+                ->with('attributes', $this->attributes)
                 ->render();
     }
 }
