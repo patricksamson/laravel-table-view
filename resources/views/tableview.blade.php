@@ -50,7 +50,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
 
 <script type="text/javascript">
-   var tableComments = new Vue({
+   new Vue({
         el: '#{{ $htmlId }}',
 
         data() {
