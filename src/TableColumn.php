@@ -9,7 +9,7 @@ class TableColumn
     protected $prop;
     protected $label;
 
-    public function __construct($prop, $label)
+    public function __construct($label, $prop)
     {
         $this->prop = $prop;
         $this->label = $label;

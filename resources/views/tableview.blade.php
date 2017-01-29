@@ -3,10 +3,10 @@
         <el-col :span="6">
             <el-input
                 icon="search"
-                placeholder="Search"
+                placeholder="@lang('laravel-table-view::tableview.search')"
                 v-model="search"
                 @keyup.native.enter="handleSearch">
-                <el-button slot="append" icon="search" @click="handleSearch">Search</el-button>
+                <el-button slot="append" icon="search" @click="handleSearch">@lang('laravel-table-view::tableview.search')</el-button>
             </el-input>
         </el-col>
     </el-row>
@@ -15,13 +15,14 @@
         <el-table
             :data="tableData"
             v-loading="isLoading"
+            element-loading-text="@lang('laravel-table-view::tableview.loading')"
 
             {!! $attributes->render() !!}
 
             style="width: 100%"
             @sort-change="handleSortChange">
 
-            <span slot="empty">No results.</span>
+            <span slot="empty">@lang('laravel-table-view::tableview.empty')</span>
 
             @foreach($columns as $column)
 

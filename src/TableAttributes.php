@@ -11,8 +11,20 @@ class TableAttributes extends HtmlAttributes
         $this->attributes = config('tableview.default-table-attributes', []);
     }
 
-    public function setDefaultSort($column, $order = 'asc')
+    public function setDefaultSort($column, $order = 'ascending')
     {
+        switch ($order) {
+            case 'desc':
+            case 'descending':
+            case -1:
+                $order = 'descending';
+                break;
+
+            default:
+                $order = 'ascending';
+                break;
+        }
+
         $this->set(':default-sort', "{ prop: '$column', order: '$order' }");
     }
 }

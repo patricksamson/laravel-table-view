@@ -16,7 +16,6 @@ return [
      */
     'default-table-attributes' => [
         'border' => true,
-        'element-loading-text' => 'Loading...',
         'height' => 500,
         'highlight-current-row' => true,
         'stripe' => true,
