@@ -14,11 +14,7 @@
         }
     ],
     "require": {
-        "illuminate/support": "~5.2",
-        "illuminate/http": "~5.2",
-        "prettus/l5-repository": "~2.6",
-        "league/fractal": "^0.14.0",
-        "prettus/laravel-validation": "^1.1"
+        "illuminate/support": "~5.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",

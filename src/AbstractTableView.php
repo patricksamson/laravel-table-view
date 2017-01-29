@@ -32,10 +32,15 @@ abstract class AbstractTableView
     /**
      * Collection of TableColumn.
      *
-     * @var Collection
+     * @var Illuminate\Support\Collection
      */
     protected $columns;
 
+    /**
+     * This table's attributes.
+     *
+     * @var [type]
+     */
     protected $attributes;
 
     public function __construct($htmlId, $apiURL)
@@ -73,9 +78,6 @@ abstract class AbstractTableView
 
     public function render()
     {
-        $this->attributes->setDefaultsort('date');
-        $this->attributes->set('border', 'true');
-
         return View::make($this->view)
                 ->with('htmlId', $this->htmlId)
                 ->with('apiURL', $this->apiURL)

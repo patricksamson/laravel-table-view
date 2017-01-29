@@ -4,19 +4,20 @@ namespace Lykegenes\TableView;
 
 use Illuminate\Support\Facades\View;
 
-class TableColumn {
-
-    protected $attribute;
+class TableColumn
+{
+    protected $prop;
     protected $label;
 
-    public function __construct($attribute, $label) {
-        $this->attribute = $attribute;
+    public function __construct($prop, $label)
+    {
+        $this->prop = $prop;
         $this->label = $label;
     }
 
-    public function getAttribute()
+    public function getProp()
     {
-        return $this->attribute;
+        return $this->prop;
     }
 
     public function getLabel()
