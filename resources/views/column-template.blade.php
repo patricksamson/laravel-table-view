@@ -1,6 +1,6 @@
 <el-table-column
     label="{{ $column->getLabel() }}">
     <template scope="scope">
-        {!! $column->getTemplate() !!}
+        @include($column->getTemplate())
     </template>
 </el-table-column>

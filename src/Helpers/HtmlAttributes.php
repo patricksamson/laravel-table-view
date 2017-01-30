@@ -13,6 +13,13 @@ class HtmlAttributes
         }
     }
 
+    public function get($name)
+    {
+        if (array_key_exists($name, $this->attributes)) {
+            return $this->attributes[$name];
+        }
+    }
+
     public function render()
     {
         $result = [];

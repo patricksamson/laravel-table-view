@@ -2,7 +2,7 @@
 
 use Lykegenes\TableView\Helpers\HtmlAttributes;
 
-class TestCase extends Orchestra\Testbench\TestCase
+class HtmlAttributesTest extends Orchestra\Testbench\TestCase
 {
     /** @test */
     public function it_renders_strings()

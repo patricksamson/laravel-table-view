@@ -1,4 +1,5 @@
 <el-table-column
-    prop="{{ $column->getProp() }}"
-    label="{{ $column->getLabel() }}">
+    {!! $column->getHtmlAttributes()->render() !!}
+    >
+
 </el-table-column>

@@ -4,10 +4,13 @@ namespace Lykegenes\TableView;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Lykegenes\TableView\Columns\BasicColumn;
 use Lykegenes\TableView\Columns\TemplateColumn;
 
 abstract class AbstractTableView
 {
+    protected $htmlId;
+
     /**
      * The Blade view to use for rendering.
      *
@@ -55,7 +58,7 @@ abstract class AbstractTableView
     public function getHtmlId()
     {
         // Generate a unique string et the "table-view-" prefix.
-        return uniqid('table-view-');
+        return $this->htmlId ?: uniqid('table-view-');
     }
 
     /**
@@ -74,7 +77,7 @@ abstract class AbstractTableView
 
     public function addColumn($label, $property)
     {
-        $this->columns->push(new TableColumn($label, $property));
+        $this->columns->push(new BasicColumn($label, $property));
 
         return $this;
     }

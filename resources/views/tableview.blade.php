@@ -26,7 +26,7 @@
 
             @foreach($columns as $column)
 
-                {!! $column->render() !!}
+                @include($column->getViewName(), ['column' => $column])
 
             @endforeach
 
@@ -89,8 +89,8 @@
             },
 
             handleSortChange(sorting) {
-                this.sort = sorting.prop
-                this.order = sorting.order
+                this.sort = sorting.prop;
+                this.order = sorting.order;
 
                 this.fetchData();
             },
@@ -99,7 +99,7 @@
                 this.isLoading = true;
 
                 // Pagination
-                this.page = page || this.page
+                this.page = page || this.page;
 
                 formattedOrder = this.order == 'descending' ? 'desc' : 'asc';
 
@@ -113,13 +113,13 @@
 
                 var self = this;
                 this.getList(params).then(function (res) {
-                    self.tableData = res.data.data
+                    self.tableData = res.data.data;
 
                     self.current_page = res.data.meta.pagination.current_page;
                     self.total_items = res.data.meta.pagination.total;
                     self.page_size = res.data.meta.pagination.per_page;
 
-                    self.isLoading = false
+                    self.isLoading = false;
                 })
             },
 
@@ -127,7 +127,10 @@
                 return axios.get('{{ $apiURL }}', {
                     params: params,
                 })
-            }
+            },
+
+            @stack('table-view-methods')
+
         },
 
         mounted() {

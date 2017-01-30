@@ -17,7 +17,6 @@ return [
     'default-table-attributes' => [
         'border' => true,
         'height' => 500,
-        'highlight-current-row' => true,
         'stripe' => true,
     ],
 ];
