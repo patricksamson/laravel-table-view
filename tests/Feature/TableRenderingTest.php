@@ -1,8 +1,6 @@
 <?php
 
-use Orchestra\Testbench\BrowserKit\TestCase;
-
-class TableRenderingTest extends TestCase
+class TableRenderingTest extends Orchestra\Testbench\TestCase
 {
     protected $dummyTable;
 
