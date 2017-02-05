@@ -112,12 +112,12 @@
                 }
 
                 var self = this;
-                this.getList(params).then(function (res) {
-                    self.tableData = res.data.data;
+                this.getList(params).then(function (response) {
+                    self.tableData = response.data.data;
 
-                    self.current_page = res.data.meta.pagination.current_page;
-                    self.total_items = res.data.meta.pagination.total;
-                    self.page_size = res.data.meta.pagination.per_page;
+                    self.current_page = response.data.meta.pagination.current_page;
+                    self.total_items = response.data.meta.pagination.total;
+                    self.page_size = response.data.meta.pagination.per_page;
 
                     self.isLoading = false;
                 })

@@ -44,6 +44,13 @@ abstract class AbstractTableView
         return $this;
     }
 
+    /**
+     * Set the Blade view to use for rendering the table.
+     *
+     * @param string $view the view path
+     *
+     * @return $this
+     */
     public function setView($view)
     {
         $this->view = $view;
@@ -72,20 +79,50 @@ abstract class AbstractTableView
     /**
      * Build the table view by adding columns and setting parameters.
      *
-     * @return mixed
+     * @return $this
      */
     abstract public function build();
 
-    public function addColumn($label, $property)
+    /**
+     * Add a basic column to the table.
+     *
+     * @param string $label      This column title to shown in the table header
+     * @param string $property   The key of this column's data in the API response
+     * @param array  $attributes This column attributes
+     *
+     * @return $this
+     */
+    public function addColumn($label, $property, $attributes = [])
     {
-        $this->columns->push(new BasicColumn($label, $property));
+        $col = new BasicColumn($label, $property);
+
+        foreach ($attributes as $key => $value) {
+            $col->getHtmlAttributes()->set($key, $value);
+        }
+
+        $this->columns->push($col);
 
         return $this;
     }
 
-    public function addTemplateColumn($label, $template)
+    /**
+     * Add a custom column template to the table.
+     *
+     * @param string $label      This column title to shown in the table header
+     * @param string $template   The path to the Blade view template
+     * @param array  $attributes This column attributes
+     *
+     * @return $this
+     */
+    public function addTemplateColumn($label, $template, $attributes = [])
     {
-        $this->columns->push(new TemplateColumn($label, $template));
+        $col = new TemplateColumn($label, $template);
+
+        foreach ($attributes as $key => $value) {
+            $col->getHtmlAttributes()->set($key, $value);
+        }
+
+        $this->columns->push($col);
 
         return $this;
     }
@@ -123,6 +160,11 @@ abstract class AbstractTableView
         $this->attributes->set(':default-sort', "{ prop: '$column', order: '$order' }");
     }
 
+    /**
+     * Render the Blade table view.
+     *
+     * @return mixed The rendered Blade view
+     */
     public function render()
     {
         return View::make($this->view)
