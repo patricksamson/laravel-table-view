@@ -6,6 +6,11 @@ class HtmlAttributes
 {
     protected $attributes = [];
 
+    public function __construct($attributes = [])
+    {
+        $this->attributes = $attributes;
+    }
+
     public function set($name, $value = true)
     {
         if ($name !== null) {

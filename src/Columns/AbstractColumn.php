@@ -13,7 +13,7 @@ class AbstractColumn implements ColumnInterface
 
     public function __construct($label)
     {
-        $this->attributes = new HtmlAttributes();
+        $this->attributes = new HtmlAttributes(config('tableview.default-column-attributes', []));
 
         $this->setLabel($label);
     }

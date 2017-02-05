@@ -19,4 +19,12 @@ return [
         'height' => 500,
         'stripe' => true,
     ],
+
+    /*
+     * The column's default attributes.
+     *
+     * Possible value can be found here : http://element.eleme.io/#/en-US/component/table#table-column-attributes
+     */
+    'default-column-attributes' => [
+    ],
 ];

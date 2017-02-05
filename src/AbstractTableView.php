@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Lykegenes\TableView\Columns\BasicColumn;
 use Lykegenes\TableView\Columns\TemplateColumn;
+use Lykegenes\TableView\Helpers\HtmlAttributes;
 
 abstract class AbstractTableView
 {
@@ -28,13 +29,13 @@ abstract class AbstractTableView
     /**
      * This table's attributes.
      *
-     * @var [type]
+     * @var Lykegenes\TableView\TableAttributes
      */
     protected $attributes;
 
     public function __construct()
     {
-        $this->attributes = new TableAttributes();
+        $this->attributes = new HtmlAttributes(config('tableview.default-table-attributes', []));
         $this->columns = new Collection();
         $this->view = config('tableview.default-table-view');
 
@@ -87,6 +88,39 @@ abstract class AbstractTableView
         $this->columns->push(new TemplateColumn($label, $template));
 
         return $this;
+    }
+
+    /**
+     * Get this table's attributes.
+     *
+     * @return Lykgenes/TableView/Helpers/HtmlAttributes This table Html attributes.
+     */
+    public function getHtmlAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Set the default column and order to sort this table.
+     *
+     * @param string $column The column key.
+     * @param string $order  The order to sort on (ascending or descending).
+     */
+    public function setDefaultSort($column, $order = 'ascending')
+    {
+        switch ($order) {
+            case 'desc':
+            case 'descending':
+            case -1:
+                $order = 'descending';
+                break;
+
+            default:
+                $order = 'ascending';
+                break;
+        }
+
+        $this->attributes->set(':default-sort', "{ prop: '$column', order: '$order' }");
     }
 
     public function render()
