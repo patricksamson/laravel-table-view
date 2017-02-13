@@ -13,7 +13,7 @@
 Execute the following command to get the latest version of the package:
 
 ```terminal
-composer require prettus/l5-repository
+composer require lykegenes/laravel-table-view
 ```
 
 ### Laravel
@@ -64,7 +64,6 @@ class DemoTableView extends AbstractTableView
         $this->setDefaultSort('date');
     }
 }
-
 ```
 
 ### Displaying the table in a view
@@ -72,9 +71,41 @@ class DemoTableView extends AbstractTableView
 Calling the `render()` method on a TableView instance will compile it and render it.
 You should call this method inside one of your app's Blade views with the `{!!  !!}`
 blade statement, in order not to escape the Html.
+Here is an example of a complete Blade template
 
 ```blade
-{!! $myTableView->render() !!}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Demo</title>
+
+        <!-- Element-UI Stylesheet -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/1.1.6/theme-default/index.css" />
+    </head>
+    <body>
+        <div id="app" class="content">
+
+            {!! $demoTableView->render() !!}
+
+        </div>
+
+        <!-- Include Vue, Element-UI and Axios -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/1.1.6/index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
+
+        <!-- The table scripts will be added to this stack -->
+        @stack('table-view-scripts')
+
+        <!-- Your Vue instance for this page -->
+        <script type="text/javascript">
+            new Vue({
+                el: '#app',
+            });
+        </script>
+
+    </body>
+</html>
 ```
 
 ### Setting-up the API endpoint
@@ -101,7 +132,7 @@ class ApiDemoController extends Controller
         $this->users->orderBy($sort, $order);
 
         if ($request->has('search')) {
-            $this->users->pushCriteria(new \Lykegenes\TableView\Criteria\SearchCriteria(['name', 'address'], $request->input('search')));
+            $this->users->pushCriteria(new \Lykegenes\TableView\Criteria\SearchCriteria(['name', 'email'], $request->input('search')));
         }
 
         return $this->users->paginate($request->input('limit', 15));

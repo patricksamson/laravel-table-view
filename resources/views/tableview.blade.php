@@ -1,3 +1,6 @@
+<{{ $htmlId }}></{{ $htmlId }}>
+
+<script type="x-template" id="{{ $htmlId }}">
 <div id="{{ $htmlId }}">
     <el-row type="flex" justify="end" style="margin-bottom: 15px;">
         <el-col :span="6">
@@ -43,16 +46,13 @@
         </el-pagination>
     </el-row>
 </div>
+</script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/element-ui/1.1.6/theme-default/index.css" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/element-ui/1.1.6/index.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
-
+@push('table-view-scripts')
 <script type="text/javascript">
-   new Vue({
-        el: '#{{ $htmlId }}',
+   Vue.component('{{ $htmlId }}', {
+
+        template: '#{{ $htmlId }}',
 
         data() {
             return {
@@ -138,3 +138,4 @@
         },
     });
 </script>
+@endpush
