@@ -2,7 +2,7 @@
 
 <script type="x-template" id="{{ $htmlId }}">
 <div id="{{ $htmlId }}">
-    <el-row type="flex" justify="end" style="margin-bottom: 15px;">
+    <el-row v-if="searchEnabled" type="flex" justify="end" style="margin-bottom: 15px;">
         <el-col :span="6">
             <el-input
                 icon="search"
@@ -36,7 +36,7 @@
         </el-table>
     </el-row>
 
-    <el-row type="flex" justify="end" style="margin-top: 15px;">
+    <el-row v-if="showPagination" type="flex" justify="end" style="margin-top: 15px;">
         <el-pagination
           layout="prev, pager, next"
           @current-change="handlePageChange"
@@ -67,6 +67,7 @@
                 order: null,
 
                 search: '',
+                searchEnabled: {{ $searchEnabled ? 'true' : 'false' }},
             }
         },
 
@@ -76,6 +77,10 @@
                     prop: this.sort,
                     order: this.order
                 }
+            },
+
+            showPagination() {
+                return this.current_page > 0;
             }
         },
 
@@ -115,9 +120,15 @@
                 this.getList(params).then(function (response) {
                     self.tableData = response.data.data;
 
-                    self.current_page = response.data.meta.pagination.current_page;
-                    self.total_items = response.data.meta.pagination.total;
-                    self.page_size = response.data.meta.pagination.per_page;
+                    try {
+                        self.current_page = response.data.meta.pagination.current_page;
+                        self.total_items = response.data.meta.pagination.total;
+                        self.page_size = response.data.meta.pagination.per_page;
+                    }
+                     catch (e) {
+                        self.current_page = 0;
+                        self.total_items = 0;
+                     }
 
                     self.isLoading = false;
                 })

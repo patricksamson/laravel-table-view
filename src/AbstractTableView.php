@@ -33,6 +33,8 @@ abstract class AbstractTableView
      */
     protected $attributes;
 
+    protected $searchEnabled = true;
+
     public function __construct()
     {
         $this->attributes = new HtmlAttributes(config('tableview.default-table-attributes', []));
@@ -105,6 +107,12 @@ abstract class AbstractTableView
         return $this;
     }
 
+    public function addFormattedColumn($label, $property, $formatter, $attributes = [])
+    {
+        $attributes[':formatter'] = $formatter;
+        return $this->addColumn($label, $property, $attributes);
+    }
+
     /**
      * Add a custom column template to the table.
      *
@@ -172,6 +180,7 @@ abstract class AbstractTableView
                 ->with('apiURL', $this->getApiURL())
                 ->with('columns', $this->columns)
                 ->with('attributes', $this->attributes)
+                ->with('searchEnabled', $this->searchEnabled)
                 ->render();
     }
 }
