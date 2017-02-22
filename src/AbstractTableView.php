@@ -107,6 +107,14 @@ abstract class AbstractTableView
         return $this;
     }
 
+    /**
+     * Add a column with a formatter to the table.
+     *
+     * @param string $label      This column title to shown in the table header
+     * @param string $property   The key of this column's data in the API response
+     * @param string $formatter  The formatter to be used to display the data in the table.
+     * @param array  $attributes This column attributes
+     */
     public function addFormattedColumn($label, $property, $formatter, $attributes = [])
     {
         $attributes[':formatter'] = $formatter;
