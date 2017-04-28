@@ -16,7 +16,8 @@ return [
      */
     'default-table-attributes' => [
         'border' => true,
-        'height' => 500,
+        //'height' => 500,      // Static table size in pixels. No more, no less.
+        'max-height' => 500,    // The table will start small and grow up to this value in pixels.
         'stripe' => true,
     ],
 
