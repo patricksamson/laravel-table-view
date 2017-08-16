@@ -1,5 +1,6 @@
 <{{ $htmlId }}></{{ $htmlId }}>
 
+@push('table-view-templates')
 <script type="x-template" id="{{ $htmlId }}">
 <div id="{{ $htmlId }}">
     <el-row v-if="searchEnabled" type="flex" justify="end" style="margin-bottom: 15px;">
@@ -47,6 +48,7 @@
     </el-row>
 </div>
 </script>
+@endpush
 
 @push('table-view-scripts')
 <script type="text/javascript">

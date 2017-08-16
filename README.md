@@ -95,6 +95,7 @@ Here is an example of a complete Blade template
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
 
         <!-- The table scripts will be added to this stack -->
+        @stack('table-view-templates')
         @stack('table-view-scripts')
 
         <!-- Your Vue instance for this page -->
