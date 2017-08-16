@@ -2,6 +2,11 @@ language: php
 
 sudo: false
 
+env:
+  global:
+    - COMPOSER_ALLOW_XDEBUG=0
+    - COMPOSER_DISCARD_CHANGES=true
+
 matrix:
   include:
     - php: 7.0
@@ -12,7 +17,7 @@ cache:
     - $HOME/.composer/cache
 
 install:
-  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - travis_retry composer update --no-interaction --prefer-dist --no-suggest
 
 script:
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
