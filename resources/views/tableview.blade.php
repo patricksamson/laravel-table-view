@@ -145,10 +145,6 @@
             @stack('table-view-methods')
 
         },
-
-        mounted() {
-            this.fetchData();
-        },
     });
 </script>
 @endpush
