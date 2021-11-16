@@ -35,6 +35,8 @@ abstract class AbstractTableView
 
     protected $searchEnabled = true;
 
+    protected $forceFetchOnMounted = false;
+
     public function __construct()
     {
         $this->attributes = new HtmlAttributes(config('tableview.default-table-attributes', []));
@@ -189,6 +191,7 @@ abstract class AbstractTableView
                 ->with('columns', $this->columns)
                 ->with('attributes', $this->attributes)
                 ->with('searchEnabled', $this->searchEnabled)
+                ->with('forceFetchOnMounted', $this->forceFetchOnMounted)
                 ->render();
     }
 }
