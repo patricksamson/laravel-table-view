@@ -60,6 +60,7 @@
             return {
                 tableData: [],
                 isLoading: true,
+                forceFetchOnMounted: {{ $forceFetchOnMounted ? 'true' : 'false' }},
 
                 current_page: 0,
                 page_size: 15,
@@ -144,6 +145,12 @@
 
             @stack('table-view-methods')
 
+        },
+
+        mounted() {
+            if (this.forceFetchOnMounted) {
+                this.fetchData();
+            }
         },
     });
 </script>
