@@ -10,7 +10,7 @@ class HtmlAttributesTest extends Orchestra\Testbench\TestCase
         $attribute = new HtmlAttributes();
         $attribute->set('testKey', 'testValue');
 
-        $this->assertContains('testKey="testValue"', $attribute->render());
+        $this->assertStringContainsString('testKey="testValue"', $attribute->render());
     }
 
     /** @test */
@@ -20,8 +20,8 @@ class HtmlAttributesTest extends Orchestra\Testbench\TestCase
         $attribute->set('testTrue', true);
         $attribute->set('testFalse', false);
 
-        $this->assertContains('testTrue="true"', $attribute->render());
-        $this->assertContains('testFalse="false"', $attribute->render());
+        $this->assertStringContainsString('testTrue="true"', $attribute->render());
+        $this->assertStringContainsString('testFalse="false"', $attribute->render());
     }
 
     /** @test */
@@ -30,7 +30,7 @@ class HtmlAttributesTest extends Orchestra\Testbench\TestCase
         $attribute = new HtmlAttributes();
         $attribute->set('testKey', 42);
 
-        $this->assertContains('testKey="42"', $attribute->render());
+        $this->assertStringContainsString('testKey="42"', $attribute->render());
     }
 
     /** @test */
@@ -39,6 +39,6 @@ class HtmlAttributesTest extends Orchestra\Testbench\TestCase
         $attribute = new HtmlAttributes();
         $attribute->set('testKey');
 
-        $this->assertContains('testKey', $attribute->render());
+        $this->assertStringContainsString('testKey', $attribute->render());
     }
 }
