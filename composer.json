@@ -29,6 +29,13 @@
     "config": {
         "preferred-install": "dist"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lykegenes\\TableView\Providers\\TableViewServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "stable",
     "prefer-stable": true
 }
