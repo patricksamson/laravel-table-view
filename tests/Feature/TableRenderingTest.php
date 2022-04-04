@@ -28,7 +28,7 @@ class TableRenderingTest extends Orchestra\Testbench\TestCase
     {
         $response = $this->get('dummyTable');
 
-        //$response->assertSee('id="'.$this->dummyTable->getHtmlId().'"');
+        $response->assertSee('id="'.$this->dummyTable->getHtmlId().'"');
     }
 }
 
