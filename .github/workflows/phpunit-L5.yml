@@ -14,18 +14,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [7.3, 7.4, 8.0, 8.1]
+        php: [7.3, 7.4]
         include:
+          - laravel: 5.2
+            testbench: ^3.2
           - laravel: 5.8
             testbench: ^3.8
-          - laravel: 6.*
-            testbench: ^4.0
-          - laravel: 7.*
-            testbench: ^5.0
-          - laravel: 8.*
-            testbench: ^6.23
-          - laravel: 9.*
-            testbench: ^7.0
 
     steps:
     - name: Checkout
@@ -43,9 +37,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-composer-
+          ${{ runner.os }}-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-
 
     - name: Install dependencies
       run: |
