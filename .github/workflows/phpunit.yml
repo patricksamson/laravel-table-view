@@ -24,31 +24,31 @@ jobs:
             testbench: ^6.23
           - laravel: 9.*
             testbench: ^7.0
-            
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v3
 
-    - name: Set up PHP ${{ matrix.php_version }}
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php_version }}
-        
-    - name: Get Composer Cache Directory
-      id: composer-cache
-      run: |
-        echo "::set-output name=dir::$(composer config cache-files-dir)"
-    - uses: actions/cache@v3
-      with:
-        path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-composer-
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-          composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --prefer-dist --no-interaction
-          
-    - name: Execute tests
-      run: vendor/bin/phpunit
+      - name: Set up PHP ${{ matrix.php_version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_version }}
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: |
+            composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+            composer update --prefer-dist --no-interaction
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
