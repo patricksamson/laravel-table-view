@@ -4,7 +4,7 @@ class TableRenderingTest extends Orchestra\Testbench\TestCase
 {
     protected $dummyTable;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
