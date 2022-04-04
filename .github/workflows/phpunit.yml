@@ -31,10 +31,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Set up PHP ${{ matrix.php_version }}
+    - name: Set up PHP ${{ matrix.php }}
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.php_version }}
+        php-version: ${{ matrix.php }}
 
     - name: Get Composer Cache Directory
       id: composer-cache
