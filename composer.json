@@ -32,7 +32,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Lykegenes\\TableView\Providers\\TableViewServiceProvider"
+                "Lykegenes\\TableView\\Providers\\TableViewServiceProvider"
             ]
         }
     },
