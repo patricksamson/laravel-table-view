@@ -24,12 +24,12 @@ class TableRenderingTest extends Orchestra\Testbench\TestCase
     }
 
     /** @test */
-    public function test_it_renders_table()
+    /*public function test_it_renders_table()
     {
         $response = $this->get('dummyTable');
 
         $response->assertSee('id="'.$this->dummyTable->getHtmlId().'"');
-    }
+    }*/
 }
 
 class DummyTable extends \Lykegenes\TableView\AbstractTableView
